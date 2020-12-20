@@ -10,7 +10,7 @@ pd.set_option('display.max_columns', None)
 pd.set_option('display.expand_frame_repr', False)
 
 
-def get_trend_df_list(init_trend_list):
+def get_trend_df_list(init_trend_list, time_frame):
 
     trend_list_list = Functions.group_list_by_size(init_trend_list, 5)
     py_trends = TrendReq(hl='en-US', tz=360, timeout=(10, 25))
@@ -20,7 +20,7 @@ def get_trend_df_list(init_trend_list):
         py_trends.build_payload(
             trend_list,
             cat=0,
-            timeframe="2017-01-01 2020-12-15",
+            timeframe=time_frame,
             geo="US",
             gprop=""
         )
@@ -34,7 +34,7 @@ def get_trend_df_list(init_trend_list):
     return trends_df_list
 
 
-def show_trends(init_trend_list, graph_individually=False):
+def show_trends(init_trend_list, time_frame, graph_individually=False):
 
     def update_and_show_graph():
         plt.xlabel("Date")
@@ -45,7 +45,7 @@ def show_trends(init_trend_list, graph_individually=False):
 
         plt.show()
 
-    trend_df_list = get_trend_df_list(init_trend_list)
+    trend_df_list = get_trend_df_list(init_trend_list, time_frame)
 
     for trend, trend_df in zip(init_trend_list, trend_df_list):
 
@@ -78,7 +78,7 @@ def main():
         "amazon"
     ]
 
-    show_trends(trend_list, graph_individually=True)
+    show_trends(trend_list, time_frame="2017-01-01 2020-12-15", graph_individually=True)
 
 
 if __name__ == '__main__':
