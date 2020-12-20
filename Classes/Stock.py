@@ -1,5 +1,6 @@
 import os
 import pickle
+import yfinance as yf
 import matplotlib.pyplot as plt
 
 from General import Functions, Constants
@@ -29,6 +30,24 @@ class Stock:
         plt.show()
 
 
+def download_and_save_stock_list(ticker_name_list, period, data_dir):
+    for ticker_name in ticker_name_list:
+        ticker_name = ticker_name.upper()
+        ticker = yf.Ticker(ticker_name)
+        temp_stock = Stock(
+            ticker_name,
+            ticker.info,
+            ticker.history(period=period)
+        )
+        stock_file_path = "{}/{} stock.p".format(data_dir, ticker_name)
+        print("Attempting to save {}... ".format(ticker_name), end="")
+        if not os.path.exists(stock_file_path):
+            pickle.dump(temp_stock, open(stock_file_path, "wb"))
+            print("saved!")
+        else:
+            print("exists!")
+
+
 def get_saved_stock_info(data_dir):
     stock_list = []
     for file_name in os.listdir(data_dir):
@@ -39,3 +58,15 @@ def get_saved_stock_info(data_dir):
     return stock_list
 
 
+if __name__ == '__main__':
+    download_and_save_stock_list(
+        ticker_name_list=[
+            "FB",
+            "AMZN",
+            "AAPL",
+            "NFLX",
+            "GOOG"
+        ],
+        period="5y",
+        data_dir=Constants.stock_data_dir
+    )
