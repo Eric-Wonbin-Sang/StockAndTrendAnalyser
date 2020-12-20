@@ -68,4 +68,18 @@ def show_trends(init_trend_list, graph_individually=False):
         update_and_show_graph()
 
 
-show_trends(["prime", "shipping", "online shopping", "delivery", "amazon"][-1:], graph_individually=True)
+def main():
+
+    trend_list = [
+        "prime",
+        "shipping",
+        "online shopping",
+        "delivery",
+        "amazon"
+    ]
+
+    show_trends(trend_list, graph_individually=True)
+
+
+if __name__ == '__main__':
+    main()
