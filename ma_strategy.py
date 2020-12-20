@@ -83,4 +83,5 @@ def main():
     graph_ma_strategy_df_list(stock_list, rolling_period_list, ma_strategy_df_list)
 
 
-main()
+if __name__ == '__main__':
+    main()

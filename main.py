@@ -11,3 +11,7 @@ def main():
     do_trend_analysis = True
     if do_trend_analysis:
         trend_analysis.main()
+
+
+if __name__ == '__main__':
+    main()
