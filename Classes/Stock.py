@@ -3,7 +3,7 @@ import pickle
 import yfinance as yf
 import matplotlib.pyplot as plt
 
-from General import Functions, Constants
+from General import Constants
 
 
 class Stock:
@@ -19,7 +19,7 @@ class Stock:
     def graph(self):
         recent2020_df = self.history_df["2020"]
 
-        Functions.graph_x_list_and_y_list(recent2020_df.index, recent2020_df["Close"], self.company_name)
+        plt.plot(recent2020_df.index, recent2020_df["Close"], label=self.company_name)
 
         plt.xlabel("Date")
         plt.ylabel("Price (dollars)")

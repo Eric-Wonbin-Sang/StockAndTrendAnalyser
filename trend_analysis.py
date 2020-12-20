@@ -55,11 +55,11 @@ def show_trends(init_trend_list, time_frame, graph_individually=False):
         linear_regression.fit(x_list, y_list)
         y_predicted_list = linear_regression.predict(x_list)
 
-        Functions.graph_x_list_and_y_list(trend_df.index, trend_df[trend], trend)
-        Functions.graph_x_list_and_y_list(trend_df.index, y_predicted_list, "{} linear regression: {}".format(
-            trend,
-            "+" if (y_predicted_list[-1] - y_predicted_list[0]) / 2 > 0 else "-"
-        ))
+        lin_reg_label = "{} linear regression: {}".format(
+            trend, "+" if (y_predicted_list[-1] - y_predicted_list[0]) / 2 > 0 else "-")
+
+        plt.plot(trend_df.index, trend_df[trend], label=trend)
+        plt.plot(trend_df.index, y_predicted_list, label=lin_reg_label)
 
         if graph_individually:
             update_and_show_graph()
