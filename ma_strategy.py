@@ -54,9 +54,12 @@ def graph_ma_strategy_df_list(stock_list, rolling_period_list, ma_strategy_df_li
         for rolling_col_name in get_rolling_col_name_list(rolling_period_list):
             plt.plot(ma_strategy_df.index, ma_strategy_df[rolling_col_name], label=rolling_col_name, zorder=1)
 
-        plt.scatter(ma_strategy_df.index, ma_strategy_df["signal"], color="indigo", marker='o', alpha=1, zorder=2)
-        plt.scatter(ma_strategy_df.index, ma_strategy_df["Buy"], color='green', marker='^', alpha=1, zorder=2)
-        plt.scatter(ma_strategy_df.index, ma_strategy_df["Sell"], color='red', marker='v', alpha=1, zorder=2)
+        plt.scatter(ma_strategy_df.index, ma_strategy_df["signal"],
+                    color="indigo", marker='o', alpha=1, zorder=2, label="MA Intersections")
+        plt.scatter(ma_strategy_df.index, ma_strategy_df["Buy"],
+                    color='green', marker='^', alpha=1, zorder=3, label="Buy Signals")
+        plt.scatter(ma_strategy_df.index, ma_strategy_df["Sell"],
+                    color='red', marker='v', alpha=1, zorder=3, label="Sell Signals")
 
         plt.xlabel("Date")
         plt.ylabel("Price (dollars)")
